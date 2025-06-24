@@ -1,405 +1,369 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Martins Drone | Soluções em Drones no Rio de Janeiro</title>
+    <title>Martins Drone: Elevando Suas Perspectivas. Reparo, Vendas e Filmagens Aéreas Profissionais.</title>
+    <!-- Inclui o Tailwind CSS via CDN para estilização rápida e responsiva -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
+        /* Estilo para a fonte Inter */
         body {
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
+            font-family: 'Inter', sans-serif;
         }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        /* Estilo para ícones SVG */
+        .icon-svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
         }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        /* Estilo para o menu mobile - começa escondido e fora da tela */
+        .mobile-nav-closed {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none; /* Impede interação quando escondido */
         }
-        
-        .float-btn {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .hero-image {
-            background-image: url('https://images.unsplash.com/photo-1579829366248-204fe8413f31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 90vh;
+        /* Estilo para o menu mobile - visível */
+        .mobile-nav-open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto; /* Permite interação quando visível */
         }
     </style>
 </head>
-<body class="bg-gray-50">
-    <!-- Botões flutuantes -->
-    <div class="fixed bottom-8 right-8 z-50 space-y-4">
-        <a href="https://wa.me/5521983342084" target="_blank" class="float-btn bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-colors">
-            <i class="fab fa-whatsapp text-2xl"></i>
-        </a>
-        <a href="tel:+5521983342084" class="float-btn bg-blue-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-600 transition-colors">
-            <i class="fas fa-phone text-xl"></i>
-        </a>
-    </div>
+<body class="bg-gray-50 text-gray-800">
 
-    <!-- Header -->
-    <header class="gradient-bg text-white shadow-lg sticky top-0 z-40">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <i class="fas fa-drone-alt text-2xl"></i>
-                <h1 class="text-2xl font-bold">Martins Drone</h1>
-            </div>
-            <nav class="hidden md:block">
-                <ul class="flex space-x-6">
-                    <li><a href="#home" class="hover:text-blue-200 transition-colors">Início</a></li>
-                    <li><a href="#services" class="hover:text-blue-200 transition-colors">Serviços</a></li>
-                    <li><a href="#about" class="hover:text-blue-200 transition-colors">Sobre</a></li>
-                    <li><a href="#contact" class="hover:text-blue-200 transition-colors">Contato</a></li>
+    <!-- Cabeçalho (Header) com Navegação -->
+    <header class="bg-white shadow-sm py-4 px-6 md:px-12 fixed w-full z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#hero" class="text-2xl font-bold text-blue-700">Martins Drone</a>
+            
+            <!-- Botão de menu hambúrguer para mobile -->
+            <button id="menu-button" class="md:hidden focus:outline-none">
+                <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h4"></path>
+                </svg>
+            </button>
+
+            <!-- Navegação principal (escondida em mobile por padrão) -->
+            <nav id="main-nav" class="md:flex md:flex-row md:space-x-8 md:mt-0 
+                                      fixed top-16 left-0 w-full bg-white shadow-lg py-4 px-6
+                                      flex-col items-start
+                                      transition-all duration-300 ease-in-out mobile-nav-closed">
+                <!-- Links do menu em formato de lista -->
+                <ul class="w-full">
+                    <li class="py-2 px-4 hover:bg-gray-100 rounded-md">
+                        <a href="#servicos" class="nav-link text-gray-600 hover:text-blue-700 font-medium font-bold w-full block text-left">Serviços</a>
+                    </li>
+                    <li class="py-2 px-4 hover:bg-gray-100 rounded-md">
+                        <a href="#venda-drones" class="nav-link text-gray-600 hover:text-blue-700 font-medium font-bold w-full block text-left">Venda de Drones</a>
+                    </li>
+                    <li class="py-2 px-4 hover:bg-gray-100 rounded-md">
+                        <a href="#filming" class="nav-link text-gray-600 hover:text-blue-700 font-medium font-bold w-full block text-left">Filmagens</a>
+                    </li>
+                    <li class="py-2 px-4 hover:bg-gray-100 rounded-md">
+                        <a href="#contact" class="nav-link text-gray-600 hover:text-blue-700 font-medium font-bold w-full block text-left">Contato</a>
+                    </li>
                 </ul>
             </nav>
-            <button class="md:hidden text-xl" id="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-        <!-- Mobile menu -->
-        <div class="md:hidden hidden bg-blue-900 px-4 py-2" id="mobile-menu">
-            <ul class="space-y-2">
-                <li><a href="#home" class="block py-2 hover:text-blue-200">Início</a></li>
-                <li><a href="#services" class="block py-2 hover:text-blue-200">Serviços</a></li>
-                <li><a href="#about" class="block py-2 hover:text-blue-200">Sobre</a></li>
-                <li><a href="#contact" class="block py-2 hover:text-blue-200">Contato</a></li>
-            </ul>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-image relative">
-        <div class="absolute inset-0 bg-black bg-opacity-60 flex items-center">
-            <div class="container mx-auto px-4 text-white">
-                <div class="max-w-2xl">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-4 animate-pulse">Soluções em Drones Profissionais</h1>
-                    <p class="text-xl md:text-2xl mb-8">Manutenção, venda e cobertura de eventos com a mais alta tecnologia em drones</p>
-                    <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full inline-block transition-colors">
-                        Fale Conosco
-                    </a>
+    <!-- Hero Section - Seção de Destaque -->
+    <section id="hero" class="relative bg-gradient-to-r from-blue-600 to-teal-500 text-white flex items-center justify-center min-h-screen pt-20">
+        <!-- Imagem de fundo sem texto para evitar a "marca d'água" do placeholder -->
+        <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://placehold.co/1920x1080/004080/004080');"></div>
+        <div class="relative z-10 text-center max-w-4xl mx-auto p-6 md:p-8">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">
+                Martins Drone: Elevando Suas Perspectivas.
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-90">
+                Especialistas em manutenção, venda de Drones DJI e imagens aéreas profissionais em Realengo, Rio de Janeiro.
+            </p>
+            <!-- WhatsApp link updated with the new number -->
+            <a href="https://wa.me/5521983342084?text=Ol%C3%A1%2C%20gostaria%20de%20um%20or%C3%A7amento%20para%20servi%C3%A7os%20de%20drone." target="_blank" class="bg-white text-blue-700 hover:bg-gray-100 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 inline-flex items-center space-x-2">
+                <svg class="icon-svg w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.04 2C7.34 2 3.44 5.86 3.44 10.55C3.44 12.08 3.84 13.51 4.57 14.77L3.15 19.34L7.8 17.92C8.98 18.58 10.45 18.91 12.04 18.91C16.74 18.91 20.64 15.05 20.64 10.36C20.64 5.67 16.74 2 12.04 2ZM15.86 14.54C15.69 14.86 14.34 15.54 14.07 15.63C13.8 15.72 13.59 15.76 13.38 15.65C13.16 15.54 12.44 15.29 11.58 14.5C10.73 13.72 10.15 12.92 9.95 12.65C9.75 12.38 9.58 12.29 9.38 12.18C9.17 12.06 8.97 12.02 8.76 12.02C8.55 12.02 8.24 12.11 7.97 12.4C7.71 12.69 7.02 13.32 7.02 14.54C7.02 15.76 7.84 16.94 7.95 17.07C8.06 17.2 8.16 17.3 8.35 17.43C8.54 17.57 9.07 17.65 9.29 17.65C9.51 17.65 9.77 17.61 10.05 17.58C10.33 17.55 11.02 17.21 11.83 16.63C12.87 15.86 13.72 15.11 14.39 14.57C15.06 14.03 15.60 13.59 15.80 13.32C16.00 13.05 16.17 12.96 16.28 12.85C16.39 12.74 16.50 12.59 16.44 12.33C16.38 12.07 15.93 11.51 15.86 11.33C15.79 11.16 15.73 11.05 15.66 10.99C15.59 10.93 15.48 10.88 15.37 10.84C15.26 10.80 15.06 10.74 14.86 10.71C14.65 10.68 14.45 10.65 14.24 10.65C14.03 10.65 13.75 10.65 13.54 10.65C13.33 10.65 13.06 10.74 12.84 10.96C12.63 11.18 11.96 11.86 11.96 13.19C11.96 14.52 12.92 14.71 13.12 14.85C13.33 14.99 15.70 15.93 15.86 15.98C16.02 16.03 16.14 15.98 16.25 15.82C16.36 15.66 16.36 15.12 16.30 15.01C16.24 14.91 16.02 14.59 15.86 14.54Z" />
+                </svg>
+                Solicite um Orçamento Rápido!
+            </a>
+        </div>
+    </section>
+
+    <!-- Seção de Serviços -->
+    <section id="servicos" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6 md:px-12 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12">Nossos Serviços Especializados</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Serviço 1: Conserto e Manutenção - Ícone de Chave Inglesa -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <div class="flex justify-center mb-6">
+                        <svg class="icon-svg text-blue-600 w-16 h-16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.65 6.35C16.26 4.97 14.25 4 12 4C7.58 4 4.01 7.58 4.01 12C4.01 16.42 7.58 20 12 20C16.25 20 19.74 16.71 19.98 12.5H17.98C17.74 15.62 15.12 18 12 18C8.69 18 6 15.31 6 12C6 8.69 8.69 6 12 6C13.66 6 15.19 6.69 16.25 7.75L13 11H20V4L17.65 6.35Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Conserto e Manutenção de Drones</h3>
+                    <p class="text-gray-700 text-lg leading-relaxed">
+                        Diagnóstico preciso e reparos eficientes para seu drone. Substituição de peças originais, calibração de sensores e atualização de firmware para diversas marcas, com foco em DJI.
+                    </p>
+                </div>
+                <!-- Serviço 2: Venda de Drones DJI - Ícone de Loja (Store) -->
+                <div id="venda-drones" class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <div class="flex justify-center mb-6">
+                        <svg class="icon-svg text-blue-600 w-16 h-16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 4H4v2h16V4zm1 10v-2l-1-5H4L3 12v2h1V20h2v-6h10v6h2v-6h1zm-9 4H8v-4h4v4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Venda de Drones DJI</h3>
+                    <p class="text-gray-700 text-lg leading-relaxed">
+                        Os melhores modelos DJI para lazer, fotografia, vídeo profissional e uso industrial. Oferecemos assessoria completa para sua escolha e acessórios.
+                        <br>
+                        <span class="font-semibold text-gray-800">Atendemos todo o território nacional via Correios Sedex!</span>
+                    </p>
+                </div>
+                <!-- Serviço 3: Filmagens Aéreas Profissionais - Ícone de Câmera de Vídeo -->
+                <div id="filmagem" class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <div class="flex justify-center mb-6">
+                        <svg class="icon-svg text-blue-600 w-16 h-16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 10.5V7C17 6.45 16.55 6 16 6H4C3.45 6 3 6.45 3 7V17C3 17.55 3.45 18 4 18H16C16.55 18 17 17.55 17 17V13.5L21 17.5V6.5L17 10.5Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Filmagens Aéreas Profissionais</h3>
+                    <p class="text-gray-700 text-lg leading-relaxed">
+                        Transforme seus momentos em memórias inesquecíveis. Realizamos filmagens de alta qualidade para casamentos, aniversários e eventos esportivos como Drift.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-16 bg-gray-100">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-blue-900 mb-4">Nossos Serviços</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Repairs -->
-                <div class="service-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300">
-                    <div class="h-48 bg-blue-100 flex items-center justify-center">
-                        <i class="fas fa-tools text-blue-600 text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-3">Manutenção de Drones</h3>
-                        <p class="text-gray-600 mb-4">Serviço especializado em manutenção de drones DJI e outras marcas. Consertos, calibração e revisões completas.</p>
-                        <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800 inline-flex items-center">
-                            Solicitar <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
+    <!-- Nova Seção: Seletor de Drones com IA -->
+    <section class="py-16 md:py-24 bg-gray-100">
+        <div class="container mx-auto px-6 md:px-12 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12">Seletor de Drones com IA ✨</h2>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+                Descreva o que você procura em um drone (uso, experiência, orçamento, etc.) e nossa inteligência artificial sugerirá modelos DJI ideais para você!
+            </p>
+            <div class="bg-white p-8 rounded-lg shadow-md max-w-2xl mx-auto">
+                <textarea id="drone-requirements" class="w-full p-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4" rows="6" placeholder="Ex: 'Preciso de um drone para fotografia de paisagens, sou iniciante e tenho um orçamento de até R$ 5.000.'"></textarea>
+                <button id="suggest-drone-button" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105">
+                    Sugira um Drone com IA ✨
+                </button>
+                <div id="drone-suggestion-loading" class="mt-4 text-blue-600 font-semibold hidden">
+                    Carregando sugestão...
                 </div>
-                
-                <!-- Sales -->
-                <div class="service-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300">
-                    <div class="h-48 bg-green-100 flex items-center justify-center">
-                        <i class="fas fa-shopping-bag text-green-600 text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-3">Venda de Drones</h3>
-                        <p class="text-gray-600 mb-4">Drones DJI novos e seminovos com garantia e suporte técnico especializado.</p>
-                        <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800 inline-flex items-center">
-                            Consultar <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Events -->
-                <div class="service-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300">
-                    <div class="h-48 bg-purple-100 flex items-center justify-center">
-                        <i class="fas fa-video text-purple-600 text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-3">Cobertura de Eventos</h3>
-                        <p class="text-gray-600 mb-4">Registros aéreos profissionais para casamentos, shows, eventos esportivos e muito mais.</p>
-                        <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800 inline-flex items-center">
-                            Orçamento <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Buy -->
-                <div class="service-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 md:col-span-2 lg:col-span-1">
-                    <div class="h-48 bg-yellow-100 flex items-center justify-center">
-                        <i class="fas fa-hand-holding-usd text-yellow-600 text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-3">Compramos Seu Drone</h3>
-                        <p class="text-gray-600 mb-4">Compramos drones mesmo com defeito. Avaliamos seu equipamento e oferecemos o melhor preço.</p>
-                        <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800 inline-flex items-center">
-                            Vender <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Training -->
-                <div class="service-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 md:col-span-2 lg:col-span-1">
-                    <div class="h-48 bg-red-100 flex items-center justify-center">
-                        <i class="fas fa-graduation-cap text-red-600 text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-3">Treinamento</h3>
-                        <p class="text-gray-600 mb-4">Cursos especializados para pilotagem de drones, operação segura e técnicas avançadas.</p>
-                        <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800 inline-flex items-center">
-                            Saber Mais <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
+                <div id="drone-suggestion-result" class="mt-8 text-left p-6 bg-blue-50 rounded-lg border border-blue-200 hidden">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-4">Sua Sugestão de Drone:</h3>
+                    <p class="text-gray-800 whitespace-pre-wrap" id="suggestion-text"></p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-16 gradient-bg text-white">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col lg:flex-row items-center">
-                <div class="lg:w-1/2 mb-8 lg:mb-0 lg:pr-12">
-                    <h2 class="text-3xl font-bold mb-6">Sobre a Martins Drone</h2>
-                    <p class="mb-4">Somos uma empresa especializada em soluções com drones, localizada no Rio de Janeiro, com anos de experiência no mercado.</p>
-                    <p class="mb-4">Nossa equipe é formada por técnicos certificados e pilotos profissionais, garantindo a melhor qualidade em todos os nossos serviços.</p>
-                    <p class="mb-6">Comprometidos com a excelência, utilizamos apenas equipamentos de primeira linha e técnicas atualizadas para oferecer o melhor para nossos clientes.</p>
-                    <div class="flex space-x-4">
-                        <a href="https://www.youtube.com/user/jeancefa" target="_blank" class="bg-red-600 hover:bg-red-700 text-white w-10 h-10 rounded-full flex items-center justify-center">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                        <a href="https://instagram.com/martinsdroneoficial" target="_blank" class="bg-pink-600 hover:bg-pink-700 text-white w-10 h-10 rounded-full flex items-center justify-center">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
+    <!-- Seção Por Que Escolher a Martins Drone -->
+    <section class="py-16 md:py-24 bg-gray-100">
+        <div class="container mx-auto px-6 md:px-12 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12">Por Que Escolher a Martins Drone?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Destaque 1 -->
+                <div class="flex flex-col items-center bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <svg class="icon-svg text-blue-600 w-12 h-12 mb-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7V17L12 22L22 17V7L12 2ZM12 4.14L19.78 8.01L12 11.88L4.22 8.01L12 4.14ZM4 15.93V8.86L10 11.75V19.14L4 15.93ZM14 19.14V11.75L20 8.86V15.93L14 19.14Z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Equipe Especializada e Certificada</h3>
+                    <p class="text-gray-700">Profissionais altamente qualificados e experientes no manuseio e reparo de drones.</p>
                 </div>
-                <div class="lg:w-1/2">
-                    <div class="bg-white bg-opacity-20 rounded-lg p-6 backdrop-blur-sm">
-                        <h3 class="text-xl font-bold mb-4">Nossa Localização</h3>
-                        <div class="mb-4 flex items-start">
-                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-blue-200"></i>
-                            <p>Rua Marechal Soares de Andréia, 37 - sala 304<br>Realengo, Rio de Janeiro - RJ<br>21710-180</p>
-                        </div>
-                        <div class="mb-4 flex items-center">
-                            <i class="fas fa-phone-alt mr-3 text-blue-200"></i>
-                            <p>(21) 98334-2084</p>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-clock mr-3 text-blue-200"></i>
-                            <div>
-                                <p class="font-medium">Horário de Funcionamento:</p>
-                                <p>Segunda a Sexta: 9h às 18h</p>
-                                <p>Sábado: 9h às 13h</p>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Destaque 2 -->
+                <div class="flex flex-col items-center bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <svg class="icon-svg text-blue-600 w-12 h-12 mb-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 9L15 12L12 15L9 12L12 9Z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Uso de Peças Originais DJI</h3>
+                    <p class="text-gray-700">Garantia de qualidade e durabilidade para todos os serviços de conserto e manutenção.</p>
+                </div>
+                <!-- Destaque 3 -->
+                <div class="flex flex-col items-center bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <svg class="icon-svg text-blue-600 w-12 h-12 mb-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4ZM12 6C10.79 6 9.77 6.36 8.89 7.02L10.32 8.45C10.98 7.77 11.96 7.33 13 7.33C14.04 7.33 15.02 7.77 15.68 8.45L17.11 7.02C16.23 6.36 15.21 6 14 6H12Z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Atendimento Personalizado</h3>
+                    <p class="text-gray-700">Soluções customizadas e suporte completo para cada cliente e necessidade.</p>
+                </div>
+                <!-- Destaque 4 -->
+                <div class="flex flex-col items-center bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <svg class="icon-svg text-blue-600 w-12 h-12 mb-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM11 17H13V15H11V17ZM11 7H13V13H11V7Z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Agilidade e Confiança</h3>
+                    <p class="text-gray-700">Serviços rápidos e eficientes para você ter seu drone de volta ao trabalho ou lazer o mais breve possível.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-blue-900 mb-4">Entre em Contato</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Mande sua mensagem e responderemos o mais breve possível</p>
-                <div class="w-20 h-1 bg-blue-600 mx-auto mt-4"></div>
+    <!-- Seção de Depoimentos (Placeholder) -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6 md:px-12 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12">O Que Nossos Clientes Dizem</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Depoimento 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <p class="italic text-gray-700 mb-4">"O conserto do meu drone foi rápido e impecável! Atendimento excelente e meu drone está voando melhor do que nunca. Recomendo a Martins Drone a todos!"</p>
+                    <p class="font-semibold text-gray-800">- João Silva, Fotógrafo</p>
+                </div>
+                <!-- Depoimento 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <p class="italic text-gray-700 mb-4">"Comprei meu DJI aqui e o suporte foi incrível! Me ajudaram a escolher o modelo ideal para minhas necessidades. Ótima loja!"</p>
+                    <p class="font-semibold text-gray-800">- Maria Oliveira, Produtora de Eventos</p>
+                </div>
             </div>
-            
-            <div class="flex flex-col lg:flex-row gap-8">
-                <div class="lg:w-1/2 bg-gray-50 p-8 rounded-lg">
-                    <form id="contact-form" class="space-y-6">
-                        <div>
-                            <label for="name" class="block text-gray-700 mb-2">Nome</label>
-                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                        </div>
-                        <div>
-                            <label for="email" class="block text-gray-700 mb-2">E-mail</label>
-                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                        </div>
-                        <div>
-                            <label for="phone" class="block text-gray-700 mb-2">Telefone</label>
-                            <input type="text" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                        </div>
-                        <div>
-                            <label for="service" class="block text-gray-700 mb-2">Serviço de Interesse</label>
-                            <select id="service" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                <option value="">Selecione um serviço</option>
-                                <option value="repair">Manutenção de Drones</option>
-                                <option value="sales">Compra/Venda de Drones</option>
-                                <option value="events">Cobertura de Eventos</option>
-                                <option value="training">Treinamento</option>
-                                <option value="other">Outro</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="message" class="block text-gray-700 mb-2">Mensagem</label>
-                            <textarea id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
-                        </div>
-                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full w-full transition-colors">
-                            Enviar Mensagem
-                        </button>
-                    </form>
-                </div>
-                <div class="lg:w-1/2">
-                    <div class="h-full bg-gray-100 rounded-lg overflow-hidden">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3676.526774558132!2d-43.42950342537495!3d-22.8594001346578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9963bf17d8d4f7%3A0x6b0d74bde8d4bc9e!2sR.%20Mal.%20Soares%20de%20Andr%C3%A9ia%2C%2037%20-%20304%20-%20Realengo%2C%20Rio%20de%20Janeiro%20-%20RJ%2C%2021710-180!5e0!3m2!1spt-BR!2sbr!4v1692054543285!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                </div>
+            <!-- Você pode adicionar mais depoimentos aqui -->
+        </div>
+    </section>
+
+    <!-- Seção de Contato -->
+    <section id="contato" class="py-16 md:py-24 bg-gradient-to-r from-blue-600 to-teal-500 text-white">
+        <div class="container mx-auto px-6 md:px-12 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12">Fale Conosco</h2>
+            <p class="text-lg mb-8 max-w-2xl mx-auto opacity-90">
+                Entre em contato para solicitar um orçamento, tirar dúvidas ou agendar um serviço.
+            </p>
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-8">
+                <!-- Botão WhatsApp -->
+                <a href="https://wa.me/5521983342084?text=Ol%C3%A1%2C%20gostaria%20de%20um%20or%C3%A7amento%20para%20servi%C3%A7os%20de%20drone." target="_blank" class="bg-white text-blue-700 hover:bg-gray-100 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 inline-flex items-center space-x-2">
+                    <svg class="icon-svg w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.04 2C7.34 2 3.44 5.86 3.44 10.55C3.44 12.08 3.84 13.51 4.57 14.77L3.15 19.34L7.8 17.92C8.98 18.58 10.45 18.91 12.04 18.91C16.74 18.91 20.64 15.05 20.64 10.36C20.64 5.67 16.74 2 12.04 2ZM15.86 14.54C15.69 14.86 14.34 15.54 14.07 15.63C13.8 15.72 13.59 15.76 13.38 15.65C13.16 15.54 12.44 15.29 11.58 14.5C10.73 13.72 10.15 12.92 9.95 12.65C9.75 12.38 9.58 12.29 9.38 12.18C9.17 12.06 8.97 12.02 8.76 12.02C8.55 12.02 8.24 12.11 7.97 12.4C7.71 12.69 7.02 13.32 7.02 14.54C7.02 15.76 7.84 16.94 7.95 17.07C8.06 17.2 8.16 17.3 8.35 17.43C8.54 17.57 9.07 17.65 9.29 17.65C9.51 17.65 9.77 17.61 10.05 17.58C10.33 17.55 11.02 17.21 11.83 16.63C12.87 15.86 13.72 15.11 14.39 14.57C15.06 14.03 15.60 13.59 15.80 13.32C16.00 13.05 16.17 12.96 16.28 12.85C16.39 12.74 16.50 12.59 16.44 12.33C16.38 12.07 15.93 11.51 15.86 11.33C15.79 11.16 15.73 11.05 15.66 10.99C15.59 10.93 15.48 10.88 15.37 10.84C15.26 10.80 15.06 10.74 14.86 10.71C14.65 10.68 14.45 10.65 14.24 10.65C14.03 10.65 13.75 10.65 13.54 10.65C13.33 10.65 13.06 10.74 12.84 10.96C12.63 11.18 11.96 11.86 11.96 13.19C11.96 14.52 12.92 14.71 13.12 14.85C13.33 14.99 15.70 15.93 15.86 15.98C16.02 16.03 16.14 15.98 16.25 15.82C16.36 15.66 16.36 15.12 16.30 15.01C16.24 14.91 16.02 14.59 15.86 14.54Z" />
+                </svg>
+                Fale Pelo WhatsApp
+                </a>
+            </div>
+
+            <div class="mt-12 text-center text-white opacity-90">
+                <p class="text-xl font-semibold mb-2">Localização:</p>
+                <!-- Endereço atualizado -->
+                <p class="text-lg">Rua Marechal Soares de Andréia, 37 - sala 304</p>
+                <p class="text-lg">Realengo, Rio de Janeiro - RJ, 21710-180</p>
+                <!-- Telefone atualizado -->
+                <p class="text-lg mt-2">Telefone: (21) 98334-2084</p>
+                <!-- Nova linha para informar sobre atendimento nacional -->
+                <p class="text-lg mt-2 font-semibold">Atendemos todo o Brasil via Correios Sedex!</p>
+                <!-- Link para o Google Maps atualizado com o endereço completo -->
+                <a href="https://www.google.com/maps/search/?api=1&query=Rua+Marechal+Soares+de+Andréia,+37+-+sala+304+-+Realengo,+Rio+de+Janeiro+-+RJ,+21710-180" target="_blank" class="text-white underline hover:text-gray-200 mt-4 inline-block">Ver no Mapa</a>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="py-16 bg-gray-100">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-blue-900 mb-4">Nossos Clientes</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Empresas e profissionais que confiam em nossos serviços</p>
-                <div class="w-20 h-1 bg-blue-600 mx-auto mt-4"></div>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center">
-                    <span class="text-gray-400 text-2xl font-bold italic">DJI</span>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center">
-                    <span class="text-gray-400 text-2xl font-bold italic">Autel</span>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center">
-                    <span class="text-gray-400 text-2xl font-bold italic">Parrot</span>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center">
-                    <span class="text-gray-400 text-2xl font-bold italic">Yuneec</span>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center">
-                    <span class="text-gray-400 text-2xl font-bold italic">Skydio</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-blue-900 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between">
-                <div class="mb-8 md:mb-0">
-                    <div class="flex items-center space-x-2 mb-4">
-                        <i class="fas fa-drone-alt text-2xl"></i>
-                        <h3 class="text-2xl font-bold">Martins Drone</h3>
-                    </div>
-                    <p class="max-w-xs mb-4">Soluções profissionais em drones no Rio de Janeiro.</p>
-                    <div class="flex space-x-4">
-                        <a href="https://www.youtube.com/user/jeancefa" target="_blank" class="text-white hover:text-red-400 transition-colors">
-                            <i class="fab fa-youtube text-xl"></i>
-                        </a>
-                        <a href="https://instagram.com/martinsdroneoficial" target="_blank" class="text-white hover:text-pink-400 transition-colors">
-                            <i class="fab fa-instagram text-xl"></i>
-                        </a>
-                        <a href="https://wa.me/5521983342084" target="_blank" class="text-white hover:text-green-400 transition-colors">
-                            <i class="fab fa-whatsapp text-xl"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
-                    <div>
-                        <h4 class="text-lg font-bold mb-4">Serviços</h4>
-                        <ul class="space-y-2">
-                            <li><a href="#" class="hover:text-blue-300 transition-colors">Manutenção</a></li>
-                            <li><a href="#" class="hover:text-blue-300 transition-colors">Venda de Drones</a></li>
-                            <li><a href="#" class="hover:text-blue-300 transition-colors">Cobertura de Eventos</a></li>
-                            <li><a href="#" class="hover:text-blue-300 transition-colors">Compramos Seu Drone</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-bold mb-4">Links Rápidos</h4>
-                        <ul class="space-y-2">
-                            <li><a href="#home" class="hover:text-blue-300 transition-colors">Início</a></li>
-                            <li><a href="#services" class="hover:text-blue-300 transition-colors">Serviços</a></li>
-                            <li><a href="#about" class="hover:text-blue-300 transition-colors">Sobre</a></li>
-                            <li><a href="#contact" class="hover:text-blue-300 transition-colors">Contato</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-bold mb-4">Contato</h4>
-                        <ul class="space-y-2">
-                            <li class="flex items-start">
-                                <i class="fas fa-map-marker-alt mt-1 mr-2"></i>
-                                <span>Rua Marechal Soares de Andréia, 37 - sala 304, Realengo - RJ</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-phone-alt mr-2"></i>
-                                <span>(21) 98334-2084</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-blue-800 mt-8 pt-8 text-center">
-                <p>&copy; 2023 Martins Drone. Todos os direitos reservados.</p>
+    <!-- Rodapé (Footer) -->
+    <footer class="bg-gray-900 text-white py-8 px-6 md:px-12 text-center">
+        <div class="container mx-auto">
+            <p class="text-sm">&copy; 2025 Martins Drone. Todos os direitos reservados.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <!-- Links para Redes Sociais (Substitua pelos seus links reais) -->
+                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                    <svg class="icon-svg w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.071 1.17.06 1.74.249 2.227.439.489.191.884.446 1.21.772.329.327.585.72.775 1.209.19.488.379 1.059.439 2.228.06 1.265.071 1.644.071 4.849 0 3.204-.012 3.584-.071 4.85-.06 1.17-.249 1.74-.439 2.227-.191.489-.446.884-.772 1.21-.327.329-.72-.585-1.209-.775-.488.19-1.059.379-2.228.439-1.265.06-1.644.071-4.849.071-3.204 0-3.584-.012-4.85-.071-1.17-.06-1.74-.249-2.227-.439-.489-.191-.884-.446-1.21-.772-.329-.327-.585-.72-.775-1.209-.19-.488-.379-1.059-.439-2.228-.06-1.265-.071-1.644-.071-4.849 0-3.204.012-3.584.071-4.85.06-1.17.249-1.74.439-2.227.191-.489.446-.884.772-1.21.327-.329.72-.585 1.209-.775.488-.19 1.059-.379 2.228-.439C8.416 2.175 8.796 2.163 12 2.163zm0 1.438c-3.111 0-3.484.01-4.704.068-1.07.057-1.615.226-1.996.377-.417.164-.72.355-.981.61-.264.261-.456.565-.62.981-.15.38-.319.926-.377 1.996-.059 1.22-.068 1.593-.068 4.704s.01 3.484.068 4.704c.057 1.07.226 1.615.377 1.996.164.417.355.72.61.981.261.264.565.456.981.62.38.15.926.319 1.996.377 1.22.059 1.593.068 4.704.068s3.484-.01 4.704-.068c1.07-.057 1.615-.226 1.996-.377.417-.164.72-.355.981-.61.264-.261-.456-.565-.62-.981-.15-.38-.319-.926-.377-1.996-.059-1.22-.068-1.593-.068-4.704s-.01-3.484-.068-4.704c-.057-1.07-.226-1.615-.377-1.996-.164-.417-.355-.72-.61-.981-.261-.264-.565-.456-.981-.62-.38-.15-.926-.319-.377-1.996-1.22-.059-1.593-.068-4.704-.068zm0 2.285c3.551 0 3.987.014 5.37.07c1.4.057 2.115.247 2.651.464.536.216.967.502 1.393.928.426.426.712.857.928 1.393.217.536.407 1.251.464 2.651.056 1.383.07 1.819.07 5.37s-.014 3.987-.07 5.37c-.057 1.4-.247 2.115-.464 2.651-.216.536-.502.967-.928 1.393-.426.426-.712.857-.928 1.393-.217-.536-.407-1.251-.464-2.651-.056-1.383-.07-1.819-.07-5.37s.014-3.987.07-5.37c.057-1.4.247-2.115.464-2.651.216-.536.502-.967.928-1.393.426-.426-.712-.857-.928-1.393.536-.217 1.251-.407 2.651-.464 1.383-.056 1.819-.07 5.37-.07zm0 2.972c-2.396 0-4.341 1.944-4.341 4.341s1.945 4.341 4.341 4.341 4.341-1.944 4.341-4.341-1.945-4.341-4.341-4.341zm0 7.185c-1.564 0-2.844-1.28-2.844-2.844s1.28-2.844 2.844-2.844 2.844 1.28 2.844 2.844-1.28 2.844-2.844 2.844zm6.525-8.23c-.767 0-1.39-.623-1.39-1.39s.623-1.39 1.39-1.39 1.39.623 1.39 1.39-.623 1.39-1.39 1.39z"/>
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                    <svg class="icon-svg w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.0252 5.61793 21.1444 10.5186 21.8483V14.8983H7.89831V12H10.5186V9.81665C10.5186 7.28723 12.0621 5.8647 14.4756 5.8647C15.6117 5.8647 16.5931 5.95292 16.9366 6.00282V8.34969L15.4243 8.35035C14.1868 8.35035 13.9486 8.94857 13.9486 9.87978V12H16.8172L16.3687 14.8983H13.9486V21.8483C18.3897 21.129 21.6881 17.0674 21.9567 12.0594L22 12Z"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        });
+        // JavaScript para o menu hambúrguer (mobile)
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuButton = document.getElementById('menu-button');
+            const mainNav = document.getElementById('main-nav');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const header = document.querySelector('header'); // Seleciona o cabeçalho para obter sua altura
 
-        // Form submission
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Simulate form submission
-            alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
-            this.reset();
-        });
+            // Calcula a altura do cabeçalho dinamicamente
+            const headerHeight = header.offsetHeight;
+            mainNav.style.top = headerHeight + 'px'; // Posiciona o menu abaixo do cabeçalho
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    targetElement.scrollIntoView({
+            menuButton.addEventListener('click', function() {
+                // Alterna entre as classes para abrir/fechar o menu
+                mainNav.classList.toggle('mobile-nav-closed');
+                mainNav.classList.toggle('mobile-nav-open');
+            });
+
+            // Fechar o menu ao clicar em um link (mobile)
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    // Se o menu estiver aberto, feche-o
+                    if (mainNav.classList.contains('mobile-nav-open')) {
+                        mainNav.classList.remove('mobile-nav-open');
+                        mainNav.classList.add('mobile-nav-closed');
+                    }
+                });
+            });
+
+            // Rolar suavemente para as seções ao clicar nos links de navegação
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
                         behavior: 'smooth'
                     });
-                    
-                    // Close mobile menu if open
-                    const mobileMenu = document.getElementById('mobile-menu');
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // LLM Integration for Drone Selector
+            const suggestDroneButton = document.getElementById('suggest-drone-button');
+            const droneRequirementsTextarea = document.getElementById('drone-requirements');
+            const droneSuggestionLoading = document.getElementById('drone-suggestion-loading');
+            const droneSuggestionResult = document.getElementById('drone-suggestion-result');
+            const suggestionText = document.getElementById('suggestion-text');
+
+            suggestDroneButton.addEventListener('click', async () => {
+                const prompt = droneRequirementsTextarea.value.trim();
+                if (!prompt) {
+                    alert('Por favor, descreva o que você procura em um drone.'); // Changed to alert for now, can be a custom modal later
+                    return;
+                }
+
+                droneSuggestionLoading.classList.remove('hidden');
+                droneSuggestionResult.classList.add('hidden');
+                suggestionText.textContent = ''; // Clear previous results
+
+                try {
+                    let chatHistory = [];
+                    // Modificação do prompt para indicar apenas drones da marca DJI
+                    chatHistory.push({ role: "user", parts: [{ text: `Sugira um modelo de drone DJI (somente DJI, pois é a melhor marca mundial de drones) com base nos seguintes requisitos: ${prompt}. Seja conciso e direto, indicando o modelo e o porquê da sugestão, considerando as opções de drones DJI no mercado. Não adicione informações de contato ou pedidos para o usuário.` }] });
+                    const payload = { contents: chatHistory };
+                    const apiKey = ""; 
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        suggestionText.textContent = text;
+                        droneSuggestionResult.classList.remove('hidden');
+                    } else {
+                        suggestionText.textContent = 'Não foi possível gerar uma sugestão de drone. Tente novamente com uma descrição diferente.';
+                        droneSuggestionResult.classList.remove('hidden');
                     }
+                } catch (error) {
+                    console.error('Erro ao chamar a API Gemini:', error);
+                    suggestionText.textContent = 'Ocorreu um erro ao conectar com o serviço de sugestão de drones. Por favor, tente novamente mais tarde.';
+                    droneSuggestionResult.classList.remove('hidden');
+                } finally {
+                    droneSuggestionLoading.classList.add('hidden');
                 }
             });
         });
